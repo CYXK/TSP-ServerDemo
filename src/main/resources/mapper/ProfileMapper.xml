@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsp.server.dao.ProfileMapper">
+  <resultMap id="BaseResultMap" type="com.tsp.server.bean.Profile">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="SERVICE_REQUESTOR_ID" jdbcType="INTEGER" property="serviceRequestorId" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="TOKEN_REQUESTOR_ID" jdbcType="CHAR" property="tokenRequestorId" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="ENCRYPTION_API_KEY" jdbcType="VARCHAR" property="encryptionApiKey" />
+    <result column="ENCRYPTION_SECRET" jdbcType="VARCHAR" property="encryptionSecret" />
+    <result column="POSTBACK_API_KEY" jdbcType="VARCHAR" property="postbackApiKey" />
+    <result column="POSTBACK_SECRET" jdbcType="VARCHAR" property="postbackSecret" />
+    <result column="POSTBACK_URL" jdbcType="VARCHAR" property="postbackUrl" />
+    <result column="MAXPMTS" jdbcType="INTEGER" property="maxpmts" />
+    <result column="KEYEXPTS" jdbcType="TIMESTAMP" property="keyexpts" />
+    <result column="AMOUNT_LIMIT" jdbcType="BIGINT" property="amountLimit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, SERVICE_REQUESTOR_ID, NAME, TOKEN_REQUESTOR_ID, STATUS, ENCRYPTION_API_KEY, ENCRYPTION_SECRET, 
+    POSTBACK_API_KEY, POSTBACK_SECRET, POSTBACK_URL, MAXPMTS, KEYEXPTS, AMOUNT_LIMIT
+  </sql>
+  <select id="selectByExample" parameterType="com.tsp.server.bean.ProfileExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Profile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.tsp.server.bean.ProfileExample">
+    delete from Profile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.tsp.server.bean.Profile">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into Profile
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceRequestorId != null">
+        SERVICE_REQUESTOR_ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="tokenRequestorId != null">
+        TOKEN_REQUESTOR_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="encryptionApiKey != null">
+        ENCRYPTION_API_KEY,
+      </if>
+      <if test="encryptionSecret != null">
+        ENCRYPTION_SECRET,
+      </if>
+      <if test="postbackApiKey != null">
+        POSTBACK_API_KEY,
+      </if>
+      <if test="postbackSecret != null">
+        POSTBACK_SECRET,
+      </if>
+      <if test="postbackUrl != null">
+        POSTBACK_URL,
+      </if>
+      <if test="maxpmts != null">
+        MAXPMTS,
+      </if>
+      <if test="keyexpts != null">
+        KEYEXPTS,
+      </if>
+      <if test="amountLimit != null">
+        AMOUNT_LIMIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceRequestorId != null">
+        #{serviceRequestorId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenRequestorId != null">
+        #{tokenRequestorId,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptionApiKey != null">
+        #{encryptionApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptionSecret != null">
+        #{encryptionSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="postbackApiKey != null">
+        #{postbackApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="postbackSecret != null">
+        #{postbackSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="postbackUrl != null">
+        #{postbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="maxpmts != null">
+        #{maxpmts,jdbcType=INTEGER},
+      </if>
+      <if test="keyexpts != null">
+        #{keyexpts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amountLimit != null">
+        #{amountLimit,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tsp.server.bean.ProfileExample" resultType="java.lang.Long">
+    select count(*) from Profile
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update Profile
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceRequestorId != null">
+        SERVICE_REQUESTOR_ID = #{record.serviceRequestorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tokenRequestorId != null">
+        TOKEN_REQUESTOR_ID = #{record.tokenRequestorId,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.encryptionApiKey != null">
+        ENCRYPTION_API_KEY = #{record.encryptionApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.encryptionSecret != null">
+        ENCRYPTION_SECRET = #{record.encryptionSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postbackApiKey != null">
+        POSTBACK_API_KEY = #{record.postbackApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postbackSecret != null">
+        POSTBACK_SECRET = #{record.postbackSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postbackUrl != null">
+        POSTBACK_URL = #{record.postbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxpmts != null">
+        MAXPMTS = #{record.maxpmts,jdbcType=INTEGER},
+      </if>
+      <if test="record.keyexpts != null">
+        KEYEXPTS = #{record.keyexpts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amountLimit != null">
+        AMOUNT_LIMIT = #{record.amountLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update Profile
+    set ID = #{record.id,jdbcType=INTEGER},
+      SERVICE_REQUESTOR_ID = #{record.serviceRequestorId,jdbcType=INTEGER},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      TOKEN_REQUESTOR_ID = #{record.tokenRequestorId,jdbcType=CHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      ENCRYPTION_API_KEY = #{record.encryptionApiKey,jdbcType=VARCHAR},
+      ENCRYPTION_SECRET = #{record.encryptionSecret,jdbcType=VARCHAR},
+      POSTBACK_API_KEY = #{record.postbackApiKey,jdbcType=VARCHAR},
+      POSTBACK_SECRET = #{record.postbackSecret,jdbcType=VARCHAR},
+      POSTBACK_URL = #{record.postbackUrl,jdbcType=VARCHAR},
+      MAXPMTS = #{record.maxpmts,jdbcType=INTEGER},
+      KEYEXPTS = #{record.keyexpts,jdbcType=TIMESTAMP},
+      AMOUNT_LIMIT = #{record.amountLimit,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tsp.server.bean.Profile">
+    update Profile
+    <set>
+      <if test="serviceRequestorId != null">
+        SERVICE_REQUESTOR_ID = #{serviceRequestorId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenRequestorId != null">
+        TOKEN_REQUESTOR_ID = #{tokenRequestorId,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptionApiKey != null">
+        ENCRYPTION_API_KEY = #{encryptionApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptionSecret != null">
+        ENCRYPTION_SECRET = #{encryptionSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="postbackApiKey != null">
+        POSTBACK_API_KEY = #{postbackApiKey,jdbcType=VARCHAR},
+      </if>
+      <if test="postbackSecret != null">
+        POSTBACK_SECRET = #{postbackSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="postbackUrl != null">
+        POSTBACK_URL = #{postbackUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="maxpmts != null">
+        MAXPMTS = #{maxpmts,jdbcType=INTEGER},
+      </if>
+      <if test="keyexpts != null">
+        KEYEXPTS = #{keyexpts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amountLimit != null">
+        AMOUNT_LIMIT = #{amountLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

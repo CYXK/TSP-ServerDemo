@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsp.server.dao.TokenProvisionMapper">
+  <resultMap id="BaseResultMap" type="com.tsp.server.bean.TokenProvision">
+    <id column="ID" jdbcType="CHAR" property="id" />
+    <result column="DEVICE_ID" jdbcType="CHAR" property="deviceId" />
+    <result column="WALLET_ACCOUNT" jdbcType="VARCHAR" property="walletAccount" />
+    <result column="IP4ADDRESS" jdbcType="VARCHAR" property="ip4address" />
+    <result column="LOCATION" jdbcType="VARCHAR" property="location" />
+    <result column="LOCATION_SOURCE" jdbcType="VARCHAR" property="locationSource" />
+    <result column="EMAIL_ADDRESS" jdbcType="VARCHAR" property="emailAddress" />
+    <result column="PROTECTION_TYPE" jdbcType="VARCHAR" property="protectionType" />
+    <result column="PRESENTATION_TYPE" jdbcType="VARCHAR" property="presentationType" />
+    <result column="ACCOUNT_TYPE" jdbcType="VARCHAR" property="accountType" />
+    <result column="LOCALE" jdbcType="VARCHAR" property="locale" />
+    <result column="ACCOUNT_SOURCE" jdbcType="VARCHAR" property="accountSource" />
+    <result column="CONSUMER_ENTRY_MODE" jdbcType="VARCHAR" property="consumerEntryMode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, DEVICE_ID, WALLET_ACCOUNT, IP4ADDRESS, LOCATION, LOCATION_SOURCE, EMAIL_ADDRESS, 
+    PROTECTION_TYPE, PRESENTATION_TYPE, ACCOUNT_TYPE, LOCALE, ACCOUNT_SOURCE, CONSUMER_ENTRY_MODE
+  </sql>
+  <select id="selectByExample" parameterType="com.tsp.server.bean.TokenProvisionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TokenProvision
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.tsp.server.bean.TokenProvisionExample">
+    delete from TokenProvision
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.tsp.server.bean.TokenProvision">
+    insert into TokenProvision
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="deviceId != null">
+        DEVICE_ID,
+      </if>
+      <if test="walletAccount != null">
+        WALLET_ACCOUNT,
+      </if>
+      <if test="ip4address != null">
+        IP4ADDRESS,
+      </if>
+      <if test="location != null">
+        LOCATION,
+      </if>
+      <if test="locationSource != null">
+        LOCATION_SOURCE,
+      </if>
+      <if test="emailAddress != null">
+        EMAIL_ADDRESS,
+      </if>
+      <if test="protectionType != null">
+        PROTECTION_TYPE,
+      </if>
+      <if test="presentationType != null">
+        PRESENTATION_TYPE,
+      </if>
+      <if test="accountType != null">
+        ACCOUNT_TYPE,
+      </if>
+      <if test="locale != null">
+        LOCALE,
+      </if>
+      <if test="accountSource != null">
+        ACCOUNT_SOURCE,
+      </if>
+      <if test="consumerEntryMode != null">
+        CONSUMER_ENTRY_MODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="deviceId != null">
+        #{deviceId,jdbcType=CHAR},
+      </if>
+      <if test="walletAccount != null">
+        #{walletAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="ip4address != null">
+        #{ip4address,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="locationSource != null">
+        #{locationSource,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null">
+        #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="protectionType != null">
+        #{protectionType,jdbcType=VARCHAR},
+      </if>
+      <if test="presentationType != null">
+        #{presentationType,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="locale != null">
+        #{locale,jdbcType=VARCHAR},
+      </if>
+      <if test="accountSource != null">
+        #{accountSource,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerEntryMode != null">
+        #{consumerEntryMode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tsp.server.bean.TokenProvisionExample" resultType="java.lang.Long">
+    select count(*) from TokenProvision
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update TokenProvision
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.deviceId != null">
+        DEVICE_ID = #{record.deviceId,jdbcType=CHAR},
+      </if>
+      <if test="record.walletAccount != null">
+        WALLET_ACCOUNT = #{record.walletAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip4address != null">
+        IP4ADDRESS = #{record.ip4address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.location != null">
+        LOCATION = #{record.location,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locationSource != null">
+        LOCATION_SOURCE = #{record.locationSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailAddress != null">
+        EMAIL_ADDRESS = #{record.emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.protectionType != null">
+        PROTECTION_TYPE = #{record.protectionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.presentationType != null">
+        PRESENTATION_TYPE = #{record.presentationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountType != null">
+        ACCOUNT_TYPE = #{record.accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locale != null">
+        LOCALE = #{record.locale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountSource != null">
+        ACCOUNT_SOURCE = #{record.accountSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.consumerEntryMode != null">
+        CONSUMER_ENTRY_MODE = #{record.consumerEntryMode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update TokenProvision
+    set ID = #{record.id,jdbcType=CHAR},
+      DEVICE_ID = #{record.deviceId,jdbcType=CHAR},
+      WALLET_ACCOUNT = #{record.walletAccount,jdbcType=VARCHAR},
+      IP4ADDRESS = #{record.ip4address,jdbcType=VARCHAR},
+      LOCATION = #{record.location,jdbcType=VARCHAR},
+      LOCATION_SOURCE = #{record.locationSource,jdbcType=VARCHAR},
+      EMAIL_ADDRESS = #{record.emailAddress,jdbcType=VARCHAR},
+      PROTECTION_TYPE = #{record.protectionType,jdbcType=VARCHAR},
+      PRESENTATION_TYPE = #{record.presentationType,jdbcType=VARCHAR},
+      ACCOUNT_TYPE = #{record.accountType,jdbcType=VARCHAR},
+      LOCALE = #{record.locale,jdbcType=VARCHAR},
+      ACCOUNT_SOURCE = #{record.accountSource,jdbcType=VARCHAR},
+      CONSUMER_ENTRY_MODE = #{record.consumerEntryMode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tsp.server.bean.TokenProvision">
+    update TokenProvision
+    <set>
+      <if test="deviceId != null">
+        DEVICE_ID = #{deviceId,jdbcType=CHAR},
+      </if>
+      <if test="walletAccount != null">
+        WALLET_ACCOUNT = #{walletAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="ip4address != null">
+        IP4ADDRESS = #{ip4address,jdbcType=VARCHAR},
+      </if>
+      <if test="location != null">
+        LOCATION = #{location,jdbcType=VARCHAR},
+      </if>
+      <if test="locationSource != null">
+        LOCATION_SOURCE = #{locationSource,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null">
+        EMAIL_ADDRESS = #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="protectionType != null">
+        PROTECTION_TYPE = #{protectionType,jdbcType=VARCHAR},
+      </if>
+      <if test="presentationType != null">
+        PRESENTATION_TYPE = #{presentationType,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="locale != null">
+        LOCALE = #{locale,jdbcType=VARCHAR},
+      </if>
+      <if test="accountSource != null">
+        ACCOUNT_SOURCE = #{accountSource,jdbcType=VARCHAR},
+      </if>
+      <if test="consumerEntryMode != null">
+        CONSUMER_ENTRY_MODE = #{consumerEntryMode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

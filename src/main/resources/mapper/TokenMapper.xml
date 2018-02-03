@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsp.server.dao.TokenMapper">
+  <resultMap id="BaseResultMap" type="com.tsp.server.bean.Token">
+    <id column="TOKEN" jdbcType="VARCHAR" property="token" />
+    <result column="ID" jdbcType="CHAR" property="id" />
+    <result column="PROFILE_ID" jdbcType="INTEGER" property="profileId" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="EXPIRATION_DATE" jdbcType="DATE" property="expirationDate" />
+    <result column="MAXPMTS" jdbcType="INTEGER" property="maxpmts" />
+    <result column="KEYEXPTS" jdbcType="TIMESTAMP" property="keyexpts" />
+    <result column="AMOUNT_LIMIT" jdbcType="BIGINT" property="amountLimit" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TOKEN, ID, PROFILE_ID, STATUS, EXPIRATION_DATE, MAXPMTS, KEYEXPTS, AMOUNT_LIMIT
+  </sql>
+  <select id="selectByExample" parameterType="com.tsp.server.bean.TokenExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Token
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.tsp.server.bean.TokenExample">
+    delete from Token
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.tsp.server.bean.Token">
+    insert into Token
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="token != null">
+        TOKEN,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="profileId != null">
+        PROFILE_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="expirationDate != null">
+        EXPIRATION_DATE,
+      </if>
+      <if test="maxpmts != null">
+        MAXPMTS,
+      </if>
+      <if test="keyexpts != null">
+        KEYEXPTS,
+      </if>
+      <if test="amountLimit != null">
+        AMOUNT_LIMIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="profileId != null">
+        #{profileId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="expirationDate != null">
+        #{expirationDate,jdbcType=DATE},
+      </if>
+      <if test="maxpmts != null">
+        #{maxpmts,jdbcType=INTEGER},
+      </if>
+      <if test="keyexpts != null">
+        #{keyexpts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amountLimit != null">
+        #{amountLimit,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tsp.server.bean.TokenExample" resultType="java.lang.Long">
+    select count(*) from Token
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update Token
+    <set>
+      <if test="record.token != null">
+        TOKEN = #{record.token,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.profileId != null">
+        PROFILE_ID = #{record.profileId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expirationDate != null">
+        EXPIRATION_DATE = #{record.expirationDate,jdbcType=DATE},
+      </if>
+      <if test="record.maxpmts != null">
+        MAXPMTS = #{record.maxpmts,jdbcType=INTEGER},
+      </if>
+      <if test="record.keyexpts != null">
+        KEYEXPTS = #{record.keyexpts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.amountLimit != null">
+        AMOUNT_LIMIT = #{record.amountLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update Token
+    set TOKEN = #{record.token,jdbcType=VARCHAR},
+      ID = #{record.id,jdbcType=CHAR},
+      PROFILE_ID = #{record.profileId,jdbcType=INTEGER},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      EXPIRATION_DATE = #{record.expirationDate,jdbcType=DATE},
+      MAXPMTS = #{record.maxpmts,jdbcType=INTEGER},
+      KEYEXPTS = #{record.keyexpts,jdbcType=TIMESTAMP},
+      AMOUNT_LIMIT = #{record.amountLimit,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tsp.server.bean.Token">
+    update Token
+    <set>
+      <if test="id != null">
+        ID = #{id,jdbcType=CHAR},
+      </if>
+      <if test="profileId != null">
+        PROFILE_ID = #{profileId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="expirationDate != null">
+        EXPIRATION_DATE = #{expirationDate,jdbcType=DATE},
+      </if>
+      <if test="maxpmts != null">
+        MAXPMTS = #{maxpmts,jdbcType=INTEGER},
+      </if>
+      <if test="keyexpts != null">
+        KEYEXPTS = #{keyexpts,jdbcType=TIMESTAMP},
+      </if>
+      <if test="amountLimit != null">
+        AMOUNT_LIMIT = #{amountLimit,jdbcType=BIGINT},
+      </if>
+    </set>
+    where TOKEN = #{token,jdbcType=VARCHAR}
+  </update>
+</mapper>

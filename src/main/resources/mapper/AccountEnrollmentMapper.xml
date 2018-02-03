@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tsp.server.dao.AccountEnrollmentMapper">
+  <resultMap id="BaseResultMap" type="com.tsp.server.bean.AccountEnrollment">
+    <result column="ID" jdbcType="CHAR" property="id" />
+    <result column="ACCOUNT_ID" jdbcType="INTEGER" property="accountId" />
+    <result column="WALLET_ACCOUNT" jdbcType="VARCHAR" property="walletAccount" />
+    <result column="LOCALE" jdbcType="VARCHAR" property="locale" />
+    <result column="ACCOUNT_SOURCE" jdbcType="VARCHAR" property="accountSource" />
+    <result column="ACCOUNT_ENTRY_MODE" jdbcType="VARCHAR" property="accountEntryMode" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ACCOUNT_ID, WALLET_ACCOUNT, LOCALE, ACCOUNT_SOURCE, ACCOUNT_ENTRY_MODE
+  </sql>
+  <select id="selectByExample" parameterType="com.tsp.server.bean.AccountEnrollmentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from AccountEnrollment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.tsp.server.bean.AccountEnrollmentExample">
+    delete from AccountEnrollment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.tsp.server.bean.AccountEnrollment">
+    insert into AccountEnrollment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="accountId != null">
+        ACCOUNT_ID,
+      </if>
+      <if test="walletAccount != null">
+        WALLET_ACCOUNT,
+      </if>
+      <if test="locale != null">
+        LOCALE,
+      </if>
+      <if test="accountSource != null">
+        ACCOUNT_SOURCE,
+      </if>
+      <if test="accountEntryMode != null">
+        ACCOUNT_ENTRY_MODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="walletAccount != null">
+        #{walletAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="locale != null">
+        #{locale,jdbcType=VARCHAR},
+      </if>
+      <if test="accountSource != null">
+        #{accountSource,jdbcType=VARCHAR},
+      </if>
+      <if test="accountEntryMode != null">
+        #{accountEntryMode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tsp.server.bean.AccountEnrollmentExample" resultType="java.lang.Long">
+    select count(*) from AccountEnrollment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update AccountEnrollment
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.accountId != null">
+        ACCOUNT_ID = #{record.accountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.walletAccount != null">
+        WALLET_ACCOUNT = #{record.walletAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.locale != null">
+        LOCALE = #{record.locale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountSource != null">
+        ACCOUNT_SOURCE = #{record.accountSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountEntryMode != null">
+        ACCOUNT_ENTRY_MODE = #{record.accountEntryMode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update AccountEnrollment
+    set ID = #{record.id,jdbcType=CHAR},
+      ACCOUNT_ID = #{record.accountId,jdbcType=INTEGER},
+      WALLET_ACCOUNT = #{record.walletAccount,jdbcType=VARCHAR},
+      LOCALE = #{record.locale,jdbcType=VARCHAR},
+      ACCOUNT_SOURCE = #{record.accountSource,jdbcType=VARCHAR},
+      ACCOUNT_ENTRY_MODE = #{record.accountEntryMode,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -9,6 +9,9 @@ public enum ResponseCodeEnum {
 
     SUCCESS(200,"success"),
 
+    BUSINESS_EXCEPTION(5001,"通用的业务异常"),
+
+
     ;
 
 

@@ -1,5 +1,6 @@
 package com.tsp.server.exception;
 
+import com.tsp.server.enumeration.ResponseCodeEnum;
 import com.tsp.server.pojo.rsp.ErrorRsp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +58,6 @@ public class ControllerExceptionHandler {
     public ErrorRsp messageNotReadable(HttpMessageNotReadableException exception, HttpServletResponse response) {
         logger.error("请求参数不匹配。", exception);
         return new ErrorRsp(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
-
     }
 
 
@@ -94,6 +94,7 @@ public class ControllerExceptionHandler {
         String msg = exception.getMessage();
         logger.error(msg, exception);
         ErrorRsp errRsp = new ErrorRsp();
+        errRsp.setCode(ResponseCodeEnum.BUSINESS_EXCEPTION.code());
         errRsp.setMessage(msg);
         return errRsp;
     }
